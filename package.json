@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/evwhite2/Node-Cards/issues"
   },
-  "homepage": "https://github.com/evwhite2/Node-Cards#readme"
+  "homepage": "https://github.com/evwhite2/Node-Cards#readme",
+  "dependencies": {
+    "inquirer": "^7.0.0"
+  }
 }
