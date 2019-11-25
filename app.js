@@ -15,47 +15,6 @@ var engineerCards = [];
 var managerCards = [];
 var internCards = [];
 
-//question sets:
-
-
-
-
-
-const internQ =[
-    {
-        name:"name",
-        type:"input",
-        message:"Input the name of intern:"
-    },
-    {
-        name:"id",
-        type:"number",
-        message:"Input the intern's id number:",
-        // validate: id=>{
-        //     const integer = parseFloat(id);
-
-        //     return new Promise((resolve, reject) => {
-        //         if (integer= isNaN) {
-        //             reject("Must be a unique number");
-        //         }
-        //         resolve;
-
-        //     });
-        // }
-    }, 
-    {
-        name: "email", 
-        type:"input",
-        message:"Input the intern's email address:"
-    },
-    {
-        name: "school",
-        type:"input",
-        message:"Input the intern's school:"
-    }
-];
-
-
 
 async function runTeamBuilder(){
     console.log("running Team Builder...");
@@ -177,7 +136,7 @@ function writeIntern(){
     
     inquirer.prompt(internQ).then(info =>{
         const teammate = new Intern(info.name, info.id, info.email, info.school);
-        managers.push(teammate);
+        interns.push(teammate);
         addNew();
     });
 };
