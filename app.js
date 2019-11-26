@@ -6,7 +6,6 @@ const Intern = require("./Develop/lib/Intern");
 
 
 var fs = require("fs");
-// const outputFile = require("./output/output.html");
 
 var engineers = [];
 var managers = [];
@@ -36,6 +35,9 @@ async function runTeamBuilder(){
         typify();
     }else{
         addEngineers();
+        addManagers();   
+        addInterns();
+        addAll();
         process.exit(0);
     }
 
@@ -127,7 +129,7 @@ function writeIntern(){
         },
         {
             name: "school",
-            type:"number",
+            type:"input",
             message:"Input interns's school name:"
         }
     ];
@@ -168,14 +170,15 @@ function typify(){
 };
 
 function addEngineers(){
-
+    
     engineers.forEach(info => {    
         const newCard =
             `<div class="card">
+            <div class="card-head">
             <h1>${info.name}<h1>
             <h2>Engineer</h2>
             <img src="stockPhoto.jpg">
-           
+           </div>
 
             <div class="card-body">
             <p>Email: ${info.email}</p> 
@@ -195,66 +198,92 @@ function addEngineers(){
         };
 };        
         
-// function addManagers(){
+function addManagers(){
 
-//     managers.forEach(function(info){
+    managers.forEach(function(info){
         
-//     const newCard =
-//         `<div class="card">
-//         <h1>${info.name}<h1>
-//         <h2>Role</h2>
-//         <img src="stockPhoto.jpg">
-//         </div>
+    const newCard =
+        `<div class="card">
+        <div class="card-head">
+        <h1>${info.name}<h1>
+        <h2>Manager</h2>
+        <img src="stockPhoto.jpg">
+        </div>
 
-//         <div class="card-body">
-//         <p>${info.github}</p> 
-//         <p>${info.email}</p>
-//         <p>Id Number: ${info.id}</p>
-//         </div>
+        <div class="card-body">
+        <p>Email: ${info.email}</p> 
+        <p>Id Number: ${info.id}</p>
+        <p>Office: ${info.officeNumber}</p>
+        </div>
+        </div>`;
 
-//         </div>`;
+        managerCards.push(newCard);
+    });
+
+        try{
+        fs.appendFileSync("./output/manager.html", `${managerCards}</div></body></html>`);
+        }
+        catch {
+            console.error("Unable to write to manager file.");
+        };
+};  
+
+function addInterns(){
+
+    interns.forEach(function(info){
         
-//         managerCards.push(newCard);
-//     });
+    const newCard =
+        `<div class="card">
+        <div class="card-head">
+        <h1>${info.name}<h1>
+        <h2>Intern</h2>
+        <img src="stockPhoto.jpg">
+        </div>
 
-//         try{
-//         fs.appendFileSync("./output/manager.html", `${managerCards}</div></body></html>`);
-//         }
-//         catch {
-//             console.error("Unable to write to manager file.");
-//         };
-// };  
+        <div class="card-body">
+        <p>Email: ${info.email}</p> 
+        <p>Id Number: ${info.id}</p>
+        <p>School: ${info.school}</p>
+        </div>
+        </div>`;     
 
-// function addInterns(){
+        internCards.push(newCard);
+    });
 
-//     interns.forEach(function(info){
-        
-//     const newCard =
-//         `<div class="card">
-//         <h1>${info.name}<h1>
-//         <h2>Role</h2>
-//         <img src="stockPhoto.jpg">
-//         </div>
+        try{
+        fs.appendFileSync("./output/intern.html", `${internCards}</div></body></html>`);
+        }
+        catch {
+            console.error("Unable to write to intern file.");
+        };
+};  
 
-//         <div class="card-body">
-//         <p>${info.school}</p> 
-//         <p>${info.email}</p>
-//         <p>Id Number: ${info.id}</p>
-//         </div>
+function addAll(){
+        var mainContent =
+        `
+        <div>
+        <h1>Managers</h1>
+        ${managerCards}
+        </div>
 
-//         </div>`;
-        
-//         internCards.push(newCard);
-//     });
+        <div>
+        <h1>Engineers</h1>
+        ${engineerCards}
+        </div>
 
-//         try{
-//         fs.appendFileSync("./output/intern.html", `${internCards}</div></body></html>`);
-//         }
-//         catch {
-//             console.error("Unable to write to intern file.");
-//         };
-// };  
+        <div>
+        <h1>Interns</h1>
+        ${internCards}
+        </div>
+        </div></body></html>`
 
+        try{
+        fs.appendFileSync("./output/main.html", mainContent);
+        }
+        catch {
+            console.error("Unable to write to main file.");
+        };
+};  
 
 
 runTeamBuilder();

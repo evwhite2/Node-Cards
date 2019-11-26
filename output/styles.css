@@ -15,7 +15,7 @@ body{
     color:white;
     display: flex;
     flex-direction: column;
-    max-height:385px;
+    max-height:500px;
     justify-content: left;
     margin: 15px;;
     padding:8px;
