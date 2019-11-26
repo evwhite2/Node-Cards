@@ -259,6 +259,7 @@ function addInterns(){
 };  
 
 function addAll(){
+    //need to figure out how to iterate the array of cards to print correctly to the page.
         var mainContent =
         `
         <div>
