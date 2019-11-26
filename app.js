@@ -20,10 +20,7 @@ async function runTeamBuilder(){
     console.log("running Team Builder...");
     
     await typify();
-    
-    
-
-}
+};
 
  async function addNew(){
     const addQ =[
@@ -38,6 +35,7 @@ async function runTeamBuilder(){
     if(choice.another){
         typify();
     }else{
+        addEngineers();
         process.exit(0);
     }
 
@@ -45,7 +43,7 @@ async function runTeamBuilder(){
     });
 };
 
- function writeEngineer(){ 
+function writeEngineer(){ 
     const engineerQ =[
         {
             name:"name",
@@ -69,7 +67,7 @@ async function runTeamBuilder(){
         }
     ];
 
-     inquirer.prompt(engineerQ).then(info =>{
+    inquirer.prompt(engineerQ).then(info =>{
          let teammate = new Engineer(info.name, info.id, info.email, info.github);
          engineers.push(teammate);
         addNew();
@@ -153,9 +151,9 @@ function typify(){
         }
     ];
 
-     inquirer.prompt(typeQuestion).then(choice =>{
-         
-       if (choice.role == "Engineer"){
+    inquirer.prompt(typeQuestion).then(choice =>{
+
+        if (choice.role == "Engineer"){
             writeEngineer();
        } else if (choice.role == "Intern"){
            writeIntern();
@@ -163,41 +161,39 @@ function typify(){
            writeManager();
        } else {
            typify();
-       };
+       };        
     }); 
-};
-
-
-// function addEngineers(){
 
     
-//     engineers.forEach(function(info){
-        
-//     const newCard =
-//         `<div class="card">
-//         <h1>${info.name}<h1>
-//         <h2>Role</h2>
-//         <img src="stockPhoto.jpg">
-//         </div>
+};
 
-//         <div class="card-body">
-//         <p>${info.github}</p> 
-//         <p>${info.email}</p>
-//         <p>Id Number: ${info.id}</p>
-//         </div>
+function addEngineers(){
 
-//         </div>`;
-        
-//         engineerCards.push(newCard);
-//     });
+    engineers.forEach(info => {    
+        const newCard =
+            `<div class="card">
+            <h1>${info.name}<h1>
+            <h2>Engineer</h2>
+            <img src="stockPhoto.jpg">
+           
 
-//         try{
-//         fs.appendFileSync("./output/engineer.html", `${engineerCards}</div></body></html>`);
-//         }
-//         catch {
-//             console.error("Unable to write to engineer file.");
-//         };
-// };        
+            <div class="card-body">
+            <p>Email: ${info.email}</p> 
+            <p>GitHub: ${info.github}</p>
+            <p>Id Number: ${info.id}</p>
+            </div>
+            </div>`;
+
+            engineerCards.push(newCard);
+        });
+
+        try{
+        fs.appendFileSync("./output/engineer.html", `${engineerCards}</div></body></html>`);
+        }
+        catch {
+            console.error("Unable to write to engineer file.");
+        };
+};        
         
 // function addManagers(){
 
