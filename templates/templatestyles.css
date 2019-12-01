@@ -1,21 +1,33 @@
-a{
-    font-size:16px;
-    padding:3px;
-}
 body{
-    background-color: rgb(190, 184, 240);
+    background-color: white;
     font-family: 'Calistoga', cursive;
     font-size:16px;
     justify-content: center;
     max-height: 100em;
 }
+
+#myNav{
+    background-color:rgb(51, 48, 48);
+    color:white;
+    font-family: 'Calistoga', cursive;
+    justify-content: center;
+}
+#myLogo{
+    align-content: center;
+    background-color: rgb(51, 48, 48);
+    color: white;
+    margin-bottom:0;
+    padding:15px;
+    text-align: center;
+}
+
 .card{
     background-color:rgb(51, 48, 48);
     border-radius: 8px;
     color:white;
     display: flex;
     flex-direction: column;
-    max-height:385px;
+    max-height:500px;
     justify-content: left;
     margin: 15px;;
     padding:8px;
@@ -28,6 +40,9 @@ body{
     font-size:14px;
 }
 .card-head{
+    font-family: 'Calistoga', cursive;
+    font-size:30px;
+    text-align: center;
     margin:5px;
 }
 .container{
@@ -39,35 +54,18 @@ body{
     position: relative;
     top:100px;
 }
-h1, h2{
-    font-family: 'Calistoga', cursive;
-    font-size:25px;
-    text-align: center;
+
+h1{
+    font-size:30px;
 }
-.header{
-    background-color:rgb(51, 48, 48);
-    color:white;
-    font-family: 'Calistoga', cursive;
-    text-align: center;
-    margin-bottom: 10px;
-    position: absolute;
-    top:0;
-    width: 100%;
+
+h2{
+    font-size:25px;
 }
 img{
     border: 2px solid black;
     border-radius: 5px;
     height: 150px;
-    float: right;
+    float: center;
     width: 150px;
-}
-.logo{
-    padding:0px;
-    font-size:35px;
-}
-.row{
-    background-color: white;
-    height: 100px;
-    width:100px;
-    margin: 20px;
 }
