@@ -260,23 +260,7 @@ function addInterns(){
 
 function addAll(){
     //need to figure out how to iterate the array of cards to print correctly to the page.
-        var mainContent =
-        `
-        <div>
-        <h1>Managers</h1>
-        ${managerCards}
-        </div>
-
-        <div>
-        <h1>Engineers</h1>
-        ${engineerCards}
-        </div>
-
-        <div>
-        <h1>Interns</h1>
-        ${internCards}
-        </div>
-        </div></body></html>`
+        var mainContent = `${managerCards}${engineerCards}${internCards}</div></body></html>`
 
         try{
         fs.appendFileSync("./output/main.html", mainContent);
