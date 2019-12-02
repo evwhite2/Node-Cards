@@ -1,4 +1,6 @@
 const inquirer = require("inquirer");
+const axios = require("axios");
+
 const Employee = require("./Develop/lib/Employee");
 const Engineer = require("./Develop/lib/Engineer");
 const Manager = require("./Develop/lib/Manager");
@@ -71,6 +73,21 @@ function writeEngineer(){
 
     inquirer.prompt(engineerQ).then(info =>{
          let teammate = new Engineer(info.name, info.id, info.email, info.github);
+
+        //adding url for photos:
+        
+        axios.get(`https://api.github.com/users/${teammate.github}`)
+            .then(function(res, err){
+                try{
+                    var key="photo";
+                    var val=res.data.avatar_url;
+                    teammate[key]=val
+                    
+                }catch{
+                    throw err;
+                }
+            });
+    
          engineers.push(teammate);
         addNew();
      }); 
@@ -104,6 +121,7 @@ function writeManager(){
     
     inquirer.prompt(managerQ).then(info =>{
         const teammate = new Manager(info.name, info.id, info.email, info.officeNumber);
+
         managers.push(teammate);
         addNew();
     });
@@ -169,15 +187,17 @@ function typify(){
     
 };
 
+
 function addEngineers(){
-    
+
     engineers.forEach(info => {    
+
         const newCard =
             `<div class="card">
             <div class="card-head">
             <h1>${info.name}<h1>
             <h2>Engineer</h2>
-            <img src="stockPhoto.jpg">
+            <img src=${info.photo}>
            </div>
 
             <div class="card-body">
@@ -189,6 +209,7 @@ function addEngineers(){
 
             engineerCards.push(newCard);
         });
+
 
         try{
         fs.appendFileSync("./output/engineer.html", `${engineerCards}</div></body></html>`);
@@ -207,7 +228,7 @@ function addManagers(){
         <div class="card-head">
         <h1>${info.name}<h1>
         <h2>Manager</h2>
-        <img src="stockPhoto.jpg">
+        <img src="./images/boss.jpg">
         </div>
 
         <div class="card-body">
@@ -237,7 +258,7 @@ function addInterns(){
         <div class="card-head">
         <h1>${info.name}<h1>
         <h2>Intern</h2>
-        <img src="stockPhoto.jpg">
+        <img src="./images/intern.png">
         </div>
 
         <div class="card-body">
@@ -264,6 +285,7 @@ function addAll(){
 
         try{
         fs.appendFileSync("./output/main.html", mainContent);
+        console.log("html files updated, open pages in browser");
         }
         catch {
             console.error("Unable to write to main file.");
